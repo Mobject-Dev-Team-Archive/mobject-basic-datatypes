@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="_E_TcEventClass" Id="{b166a1bc-6634-0515-0850-5ed378ce2ee1}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'linkalways'} 
+{attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
+{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK _E_TcEventClass EXTENDS EnumDatatypeBase
+VAR
+	localData : E_TcEventClass;
+	activeData : REFERENCE TO E_TcEventClass;
+	enumBaseDatatype : _UINT(localData);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Constructor" Id="{9840b35c-f7f7-0913-2e1a-14652288637d}" />
+    <Folder Name="Private" Id="{1cc1c85f-6248-0b2c-228e-1cc7b0f1cf6f}" />
+    <Folder Name="Protected" Id="{fa7d5b03-cd5a-0c6c-33e7-0fac81043777}" />
+    <Method Name="AddLocalEnumeration" Id="{b8687235-911f-095a-3076-d5c1ba582fab}" FolderPath="Private\">
+      <Declaration><![CDATA[METHOD PRIVATE AddLocalEnumeration
+VAR_INPUT
+	Enumeration : T_MAXSTRING;
+	Value : E_TcEventClass;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AddEnumeration(Enumeration, Value);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Address" Id="{36a28e97-1445-0846-121c-e46221a922b5}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
+      <Get Name="Get" Id="{8ce5d043-0618-0fe3-1455-8c576dfcaea9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Address := ADR(activeData);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ClearReference" Id="{9193ffbd-aea6-090c-3ed7-6224dd2f5f6f}">
+      <Declaration><![CDATA[METHOD PUBLIC ClearReference
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[activeData REF= localData;
+SetBaseDatatypeReference();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clone" Id="{9d536e67-a053-09fc-1b40-b0ff3e1f50ee}">
+      <Declaration><![CDATA[METHOD PUBLIC Clone : I_Datatype
+VAR
+    pClone : POINTER TO _E_TcEventClass;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pClone := __NEW(_E_TcEventClass(InitialValue := Value));
+Clone := pClone^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{647e8b0c-d9f7-0de1-1e26-66074a371660}" FolderPath="Constructor\">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	InitialValue : E_TcEventClass;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[localData := InitialValue;
+AddBaseDatatype(enumBaseDatatype);
+ClearReference();
+
+AddLocalEnumeration('TCEVENTCLASS_NONE', E_TcEventClass.TCEVENTCLASS_NONE);
+AddLocalEnumeration('TCEVENTCLASS_MAINTENANCE', E_TcEventClass.TCEVENTCLASS_MAINTENANCE);
+AddLocalEnumeration('TCEVENTCLASS_MESSAGE', E_TcEventClass.TCEVENTCLASS_MESSAGE);
+AddLocalEnumeration('TCEVENTCLASS_HINT', E_TcEventClass.TCEVENTCLASS_HINT);
+AddLocalEnumeration('TCEVENTCLASS_STATEINFO', E_TcEventClass.TCEVENTCLASS_STATEINFO);
+AddLocalEnumeration('TCEVENTCLASS_INSTRUCTION', E_TcEventClass.TCEVENTCLASS_INSTRUCTION);
+AddLocalEnumeration('TCEVENTCLASS_WARNING', E_TcEventClass.TCEVENTCLASS_WARNING);
+AddLocalEnumeration('TCEVENTCLASS_ALARM', E_TcEventClass.TCEVENTCLASS_ALARM);
+AddLocalEnumeration('TCEVENTCLASS_PARAMERROR', E_TcEventClass.TCEVENTCLASS_PARAMERROR);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Identifier" Id="{b9c572a8-d439-082b-28c0-0883357cc395}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{bc7bcdd4-112b-0208-3c05-f7d918f589a4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Identifier := 'E_TcEventClass';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="IsEnumeratorValueEqual" Id="{80e66694-34d3-0a97-0b81-dc94c6cf449d}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD IsEnumeratorValueEqual : BOOL
+VAR_INPUT
+	Enumerator : I_KeyValueForwardEnumerator;
+END_VAR
+VAR
+	storedValue : E_TcEventClass;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT Enumerator.TryGet(storedValue) THEN
+	RETURN;
+END_IF
+
+IsEnumeratorValueEqual := storedValue = activeData;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MakeReferenceTo" Id="{8ee8e762-eb14-0715-352e-4742538788ba}">
+      <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
+VAR_INPUT
+	ReferenceTarget : REFERENCE TO E_TcEventClass;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[activeData REF= ReferenceTarget;
+SetBaseDatatypeReference();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetBaseDatatypeReference" Id="{f98d4444-5eab-0687-01f1-c8953daee023}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SetBaseDatatypeReference
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[enumBaseDatatype.MakeReferenceTo(activeData);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Size" Id="{bd75d323-0b22-08c0-05de-324b0503d19b}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Size : UDINT]]></Declaration>
+      <Get Name="Get" Id="{781b60f2-e4a8-0150-0af3-a3d3c8fa5421}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Size := SIZEOF(activeData);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="TryMakeReferenceTo" Id="{24d8d7b8-1e84-0c8f-038c-179296f199a7}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
+VAR_INPUT
+	Target : I_Datatype;
+END_VAR
+VAR
+	targetAsEnum : I_EnumDatatype;
+	pTargetData : POINTER TO E_TcEventClass;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT Target.TryResolveAsEnumDatatype(targetAsEnum) THEN
+	RETURN;
+END_IF
+
+IF targetAsEnum.Identifier <> Identifier THEN
+	RETURN;
+END_IF
+
+pTargetData := Target.Address;
+activeData REF= pTargetData^;
+SetBaseDatatypeReference();
+TryMakeReferenceTo := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Value" Id="{54638d7e-8c2f-0c87-2cc4-0cff7cc7cb08}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : E_TcEventClass]]></Declaration>
+      <Get Name="Get" Id="{bc6b5bf8-6074-0fab-3620-5ee8c0556374}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Value := activeData;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{5685a8a8-c251-0aee-025e-140f4dd0f67d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[activeData := Value;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="_TIMESTRUCT_TestSuite" Id="{063984ad-8583-467d-8a00-93ecb2f6d4f1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK _TIMESTRUCT_TestSuite EXTENDS TcUnit.FB_TestSuite
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[TestAddress();
+TestClearReference();
+TestClone();
+TestTypeNameReturnsExpected();
+TestIdentifierReturnsExpected();
+TestMakeReferenceToFollowsReference();
+TestMakeReferenceToUpdatesReference();
+TestSize();
+TestValueReturnsExpectedAfterChange();
+TestSerializeTypeWith();
+TestSerializeWith();
+TestTryDeserializeFrom();
+TestTryMakeReferenceToFollowsReference();
+TestTryMakeReferenceToUpdatesReference();
+]]></ST>
+    </Implementation>
+    <Method Name="TestAddress" Id="{0697f588-6343-4554-995e-77f5987e52db}">
+      <Declaration><![CDATA[METHOD PUBLIC TestAddress
+VAR
+    _type : _TIMESTRUCT;
+    notExpected : PVOID := 0;
+    actual : PVOID;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestAddress');
+
+actual := _type.Address;
+
+AssertFalse(
+    Condition := (notExpected = actual),
+    Message := 'Type did not return a valid address.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestClearReference" Id="{ca238c00-784b-463c-9dc3-c965f56d8630}">
+      <Declaration><![CDATA[METHOD PUBLIC TestClearReference
+VAR
+    _type : _TIMESTRUCT;
+	target : TIMESTRUCT;
+    expected : TIMESTRUCT;
+    actual : TIMESTRUCT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestClearReference');
+
+_type.MakeReferenceTo(target);
+_type.ClearReference();
+target.wDay := 2;
+
+actual := _type.Value;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Value did not follow target change'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestClone" Id="{34e7d72f-aa7d-4358-af25-1fac4ad050cb}">
+      <Declaration><![CDATA[METHOD PUBLIC TestClone
+VAR
+    _type : _TIMESTRUCT;
+	clone : I_Datatype;
+	isValidClone : BOOL;
+	compareResult : DINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestClone');
+
+clone := _type.Clone();
+
+isValidClone := clone <> 0;
+
+IF isValidClone THEN
+	compareResult := memcmp(_type.Address, clone.Address, clone.Size);
+END_IF
+
+AssertTrue(
+	Condition := isValidClone,
+	Message := 'Clone did not produce a clone'
+);
+
+AssertEquals_DINT(
+	Expected := 0,
+    Actual := compareResult,
+    Message := 'Clone did not return a valid clone.'
+);
+
+clone.Dispose();
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestIdentifierReturnsExpected" Id="{cda5b421-6a6d-4447-a01c-42378a7b4be6}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIdentifierReturnsExpected
+VAR
+    _type : _TIMESTRUCT;
+    expected : STRING := 'TIMESTRUCT';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestIdentifierReturnsExpected');
+
+actual := _type.Identifier;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestMakeReferenceToFollowsReference" Id="{47b94e35-0602-4023-97fe-a1e178bec574}">
+      <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToFollowsReference
+VAR
+    _type : _TIMESTRUCT;
+	target : TIMESTRUCT;
+    expected : TIMESTRUCT := (wDay := 2);
+    actual : TIMESTRUCT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestMakeReferenceToFollowsReference');
+
+_type.MakeReferenceTo(target);
+target.wDay := 2;
+
+actual := _type.Value;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Value did not follow target change'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestMakeReferenceToUpdatesReference" Id="{2789767a-6d7f-4648-ad83-f50a47902c2d}">
+      <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToUpdatesReference
+VAR
+    _type : _TIMESTRUCT;
+	target : TIMESTRUCT;
+    expected : TIMESTRUCT := (wDay := 2);
+    actual : TIMESTRUCT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestMakeReferenceToUpdatesReference');
+
+_type.MakeReferenceTo(target);
+_type.wDay.Value := 2;
+
+actual := target;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestSerializeTypeWith" Id="{45e24862-1fdc-47db-a12d-f0b458da6e8f}">
+      <Declaration><![CDATA[METHOD PUBLIC TestSerializeTypeWith
+VAR
+    _type : _TIMESTRUCT;
+    serializer : JsonSerializer;
+    expected : STRING(1000) := '{"typeName":"STRUCT","identifier":"TIMESTRUCT","members":{"wDay":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wDayOfWeek":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wHour":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wMilliseconds":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wMinute":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wMonth":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wSecond":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wYear":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false}}}';
+    actual : STRING(1000);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestSerializeTypeWith');
+
+serializer.Reset();
+_type.SerializeTypeWith(serializer);
+serializer.TryGetSerializedData(ADR(actual), SIZEOF(actual));
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Serialization of type did not return correct string.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestSerializeWith" Id="{240a9f73-c81b-429a-b384-0b2a91e9e1c1}">
+      <Declaration><![CDATA[METHOD PUBLIC TestSerializeWith
+VAR
+    _type : _TIMESTRUCT;
+    serializer : JsonSerializer;
+    expected : STRING(500) := '{"wDay":3,"wDayOfWeek":2,"wHour":4,"wMilliseconds":7,"wMinute":5,"wMonth":1,"wSecond":6,"wYear":2000}';
+    actual : STRING(500);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestSerializeWith');
+
+_type.wYear.Value := 2000;
+_type.wMonth.Value := 1;
+_type.wDayOfWeek.Value := 2;
+_type.wDay.Value := 3;
+_type.wHour.Value := 4;
+_type.wMinute.Value := 5;
+_type.wSecond.Value := 6;
+_type.wMilliseconds.Value := 7;
+
+serializer.Reset();
+_type.SerializeWith(serializer);
+serializer.TryGetSerializedData(ADR(actual), SIZEOF(actual));
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Serialization of type data did not return correct string.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestSize" Id="{12b136f5-fae1-4691-a199-47dd583b89e1}">
+      <Declaration><![CDATA[METHOD PUBLIC TestSize
+VAR
+    _type : _TIMESTRUCT;
+    expected : UDINT := SIZEOF(TIMESTRUCT);
+    actual : UDINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestSize');
+
+actual := _type.Size;
+
+AssertEquals_UDINT(
+    Expected := Expected,
+    Actual := actual,
+    Message := 'Type did not return the correct size.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTryDeserializeFrom" Id="{95dd6ec0-60b9-4b82-9fd8-38676ddf4112}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTryDeserializeFrom
+VAR
+    deserializer : JsonDeserializer;
+    feedback : DeserializerFeedback;
+    json : STRING(500) := '{"wDay":3,"wDayOfWeek":2,"wHour":4,"wMilliseconds":7,"wMinute":5,"wMonth":1,"wSecond":6,"wYear":2000}';
+    _type : _TIMESTRUCT;
+    expected : TIMESTRUCT := (wYear := 2000, wMonth := 1, wDayOfWeek := 2, wDay := 3, wHour := 4, wMinute := 5, wSecond := 6, wMilliseconds := 7);
+    actual : TIMESTRUCT;
+ END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTryDeserializeFrom');
+
+deserializer.Reset();
+deserializer.TryLoad(json);
+_type.TryDeserializeFrom(Deserializer, Feedback);
+
+actual := _type.Value;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not deserialize correctly.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{ff3fb4fc-e49d-4e00-a998-af897e008e1d}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
+VAR
+    _type : _TIMESTRUCT;
+	target : _TIMESTRUCT;
+    expected : TIMESTRUCT := (wDay := 2);
+    actual : TIMESTRUCT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTryMakeReferenceToFollowsReference');
+
+_type.TryMakeReferenceTo(target);
+target.wDay.Value := 2;
+
+actual := _type.Value;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Value did not follow target change'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{4528263d-e525-457f-8b35-74312c2f4b85}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
+VAR
+    _type : _TIMESTRUCT;
+	target : _TIMESTRUCT;
+    expected : TIMESTRUCT := (wDay := 2);
+    actual : TIMESTRUCT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTryMakeReferenceToUpdatesReference');
+
+_type.TryMakeReferenceTo(target);
+_type.wDay.Value := 2;
+
+actual := target.Value;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTypeNameReturnsExpected" Id="{c7fcba75-ae2c-441f-8932-d3fc6908cec7}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTypeNameReturnsExpected
+VAR
+    _type : _TIMESTRUCT;
+    expected : STRING := 'STRUCT';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTypeNameReturnsExpected');
+
+actual := _type.TypeName;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestValueReturnsExpectedAfterChange" Id="{6596e144-1041-4490-b319-6129d1f10e9a}">
+      <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterChange
+VAR
+    _type : _TIMESTRUCT;
+	value : TIMESTRUCT := (wDay := 2);
+    expected : TIMESTRUCT := (wDay := 2);
+    actual : TIMESTRUCT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestValueReturnsExpectedAfterChange');
+
+_type.Value := value;
+actual := _type.Value;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Expected value not returned after change.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
