@@ -139,7 +139,7 @@ VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddUdint(activeData);]]></ST>
+        <ST><![CDATA[Serializer.AddUint(activeData);]]></ST>
       </Implementation>
     </Method>
     <Property Name="Size" Id="{bfbaedb5-39cb-0dff-2817-b472e3637a30}">
