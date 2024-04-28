@@ -113,6 +113,7 @@
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Utilities">
       <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Utilities</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -124,7 +125,7 @@
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <LibraryReference Include="mobject-basic-datatypes,0.1.0,mobject">
+    <LibraryReference Include="mobject-basic-datatypes,0.1.1,mobject">
       <Namespace>mobject_basic_datatypes</Namespace>
     </LibraryReference>
     <LibraryReference Include="mobject-datatypes,0.4.0,mobject">
