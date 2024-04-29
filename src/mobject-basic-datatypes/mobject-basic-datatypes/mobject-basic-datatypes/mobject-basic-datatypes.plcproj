@@ -19,7 +19,7 @@
     <Company>mobject</Company>
     <Released>false</Released>
     <Title>mobject-basic-datatypes</Title>
-    <ProjectVersion>0.1.1</ProjectVersion>
+    <ProjectVersion>0.2.0</ProjectVersion>
     <DefaultNamespace>mobject-basic-datatypes</DefaultNamespace>
     <Placeholder>mobject-basic-datatypes</Placeholder>
     <Author>mobject dev team</Author>

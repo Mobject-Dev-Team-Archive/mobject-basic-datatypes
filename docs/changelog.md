@@ -1,8 +1,12 @@
 # Changelog
 
+## v0.2.0-alpha
+
+- Added \_E_TcEventClass to the pack.
+
 ## v0.1.1-alpha
 
-- Bugfix, Uint incorrectly serializing as udint
+- Bugfix, Uint incorrectly serializing as udint.
 
 ## v0.1.0-alpha
 
