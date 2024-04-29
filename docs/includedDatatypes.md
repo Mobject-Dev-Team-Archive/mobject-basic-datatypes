@@ -31,7 +31,7 @@ The following datatypes are included in this pack
 
 ## Enums
 
-\_E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);
+\_E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE)
 
 ## Structures
 
