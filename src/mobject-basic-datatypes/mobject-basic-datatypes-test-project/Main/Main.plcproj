@@ -33,63 +33,6 @@
     <Compile Include="Tests\Enums\_E_TcEventClass_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tests\Primitives\_BOOL_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_BYTE_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_DINT_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_DT_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_DWORD_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_INT_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_LINT_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_LREAL_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_LWORD_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_REAL_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_SINT_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_STRING_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_TIME_OF_DAY_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_TOD_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_UDINT_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_UINT_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_ULINT_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_USINT_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tests\Primitives\_WORD_TestSuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Tests\Structs\_TIMESTRUCT_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -98,7 +41,6 @@
     <Folder Include="Tests" />
     <Folder Include="Tests\Alias" />
     <Folder Include="Tests\Enums" />
-    <Folder Include="Tests\Primitives" />
     <Folder Include="Tests\Structs" />
     <Folder Include="POUs" />
   </ItemGroup>
@@ -125,10 +67,10 @@
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <LibraryReference Include="mobject-basic-datatypes,0.1.1,mobject">
+    <LibraryReference Include="mobject-basic-datatypes,0.2.0,mobject">
       <Namespace>mobject_basic_datatypes</Namespace>
     </LibraryReference>
-    <LibraryReference Include="mobject-datatypes,0.4.0,mobject">
+    <LibraryReference Include="mobject-datatypes,0.5.0,mobject">
       <Namespace>mobject_datatypes</Namespace>
     </LibraryReference>
     <LibraryReference Include="mobject-deserialization,0.1.0,mobject">
