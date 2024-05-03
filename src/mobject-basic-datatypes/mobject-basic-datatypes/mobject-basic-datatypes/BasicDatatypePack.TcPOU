@@ -7,27 +7,6 @@
 FUNCTION_BLOCK BasicDatatypePack IMPLEMENTS I_DatatypePack
 VAR
 	
-	// primitive
-	_bool : _BOOL(FALSE);
-	_byte : _BYTE(0);
-	_dint : _DINT(0);
-	_dt : _DT(DT#1970-1-1-0:0:0);
-	_dword : _DWORD(0);
-	_int : _INT(0);
-	_lint : _LINT(0);
-	_lreal : _LREAL(0);
-	_lword : _LWORD(0);
-	_real : _REAL(0);
-	_sint : _SINT(0);
-	_time_of_day : _TIME_OF_DAY(TOD#0:0:0);
-	_tod : _TOD(TOD#0:0:0);
-	_udint : _UDINT(0);
-	_uint : _UINT(0);
-	_ulint : _ULINT(0);
-	_usint : _USINT(0);
-	_word : _WORD(0);
-    _string : _STRING('');
-	
 	// alias
     _float : _FLOAT(0.0);
 	_hresult : _HRESULT(0);
@@ -50,28 +29,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// primitive
-Datatypes.RegisterDatatype(_bool);
-Datatypes.RegisterDatatype(_byte);
-Datatypes.RegisterDatatype(_dint);
-Datatypes.RegisterDatatype(_dt);
-Datatypes.RegisterDatatype(_dword);
-Datatypes.RegisterDatatype(_int);
-Datatypes.RegisterDatatype(_lint);
-Datatypes.RegisterDatatype(_lreal);
-Datatypes.RegisterDatatype(_lword);
-Datatypes.RegisterDatatype(_real);
-Datatypes.RegisterDatatype(_sint);
-Datatypes.RegisterDatatype(_time_of_day);
-Datatypes.RegisterDatatype(_tod);
-Datatypes.RegisterDatatype(_udint);
-Datatypes.RegisterDatatype(_uint);
-Datatypes.RegisterDatatype(_ulint);
-Datatypes.RegisterDatatype(_usint);
-Datatypes.RegisterDatatype(_word);
-Datatypes.RegisterDatatype(_string);
-
-// alias
+        <ST><![CDATA[// alias
 Datatypes.RegisterDatatype(_float);
 Datatypes.RegisterDatatype(_hresult);
 

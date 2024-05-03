@@ -3,6 +3,8 @@
 ## v0.2.0-alpha
 
 - Added \_E_TcEventClass to the pack.
+- Added support for mobject-datatypes v0.5.0
+- Moved primitives back to mobject-datatypes to prevent coupling
 
 ## v0.1.1-alpha
 
