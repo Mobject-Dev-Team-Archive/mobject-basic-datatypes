@@ -67,10 +67,10 @@
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <LibraryReference Include="mobject-basic-datatypes,0.2.0,mobject">
+    <LibraryReference Include="mobject-basic-datatypes,0.3.0,mobject">
       <Namespace>mobject_basic_datatypes</Namespace>
     </LibraryReference>
-    <LibraryReference Include="mobject-datatypes,0.5.0,mobject">
+    <LibraryReference Include="mobject-datatypes,0.6.0,mobject">
       <Namespace>mobject_datatypes</Namespace>
     </LibraryReference>
     <LibraryReference Include="mobject-deserialization,0.1.0,mobject">
