@@ -191,7 +191,7 @@ TEST_FINISHED();
 VAR
     _type : _TIMESTRUCT;
     serializer : JsonSerializer;
-    expected : STRING(1000) := '{"typeName":"STRUCT","identifier":"TIMESTRUCT","members":{"wDay":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wDayOfWeek":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wHour":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wMilliseconds":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wMinute":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wMonth":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wSecond":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wYear":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false}}}';
+    expected : STRING(1000) := '{"typeName":"STRUCT","identifier":"TIMESTRUCT","members":{"wYear":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wMonth":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wDayOfWeek":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wDay":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wHour":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wMinute":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wSecond":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wMilliseconds":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false}}}';
     actual : STRING(1000);
 END_VAR
 ]]></Declaration>
@@ -217,7 +217,7 @@ TEST_FINISHED();
 VAR
     _type : _TIMESTRUCT;
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"wDay":3,"wDayOfWeek":2,"wHour":4,"wMilliseconds":7,"wMinute":5,"wMonth":1,"wSecond":6,"wYear":2000}';
+    expected : STRING(500) := '{"wYear":2000,"wMonth":1,"wDayOfWeek":2,"wDay":3,"wHour":4,"wMinute":5,"wSecond":6,"wMilliseconds":7}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>

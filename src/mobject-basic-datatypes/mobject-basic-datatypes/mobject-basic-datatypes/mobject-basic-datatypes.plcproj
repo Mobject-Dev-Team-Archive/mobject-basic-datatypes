@@ -19,7 +19,7 @@
     <Company>mobject</Company>
     <Released>false</Released>
     <Title>mobject-basic-datatypes</Title>
-    <ProjectVersion>0.3.0</ProjectVersion>
+    <ProjectVersion>0.4.0</ProjectVersion>
     <DefaultNamespace>mobject-basic-datatypes</DefaultNamespace>
     <Placeholder>mobject-basic-datatypes</Placeholder>
     <Author>mobject dev team</Author>
@@ -61,10 +61,10 @@
     <LibraryReference Include="mobject-constants-datatype-limits,1.0.0,mobject">
       <Namespace>mobject_constants_datatype_limits</Namespace>
     </LibraryReference>
-    <LibraryReference Include="mobject-datatypes,0.6.0,mobject">
+    <LibraryReference Include="mobject-datatypes,0.7.0,mobject">
       <Namespace>mobject_datatypes</Namespace>
     </LibraryReference>
-    <LibraryReference Include="mobject-deserialization,0.1.0,mobject">
+    <LibraryReference Include="mobject-deserialization,0.2.0,mobject">
       <Namespace>mobject_deserialization</Namespace>
     </LibraryReference>
     <LibraryReference Include="mobject-enumerable,1.1.0,mobject">
