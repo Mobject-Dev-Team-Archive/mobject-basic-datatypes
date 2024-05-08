@@ -192,7 +192,7 @@ TEST_FINISHED();
 VAR
     _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"typeName":"ENUM","identifier":"E_TcEventClass","enumerations":["TCEVENTCLASS_ALARM","TCEVENTCLASS_HINT","TCEVENTCLASS_INSTRUCTION","TCEVENTCLASS_MAINTENANCE","TCEVENTCLASS_MESSAGE","TCEVENTCLASS_NONE","TCEVENTCLASS_PARAMERROR","TCEVENTCLASS_STATEINFO","TCEVENTCLASS_WARNING"],"baseType":{"typeName":"UINT","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false}}';
+    expected : STRING(500) := '{"typeName":"ENUM","identifier":"E_TcEventClass","enumerations":["TCEVENTCLASS_NONE","TCEVENTCLASS_MAINTENANCE","TCEVENTCLASS_MESSAGE","TCEVENTCLASS_HINT","TCEVENTCLASS_STATEINFO","TCEVENTCLASS_INSTRUCTION","TCEVENTCLASS_WARNING","TCEVENTCLASS_ALARM","TCEVENTCLASS_PARAMERROR"],"baseType":{"typeName":"UINT","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false}}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
