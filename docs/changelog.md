@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.5.0-alpha
+
+- updated to support mobject-datatypes v0.9.0
+- updated to support mobject-deserialization v0.3.0
+- updated to support mobject-enumerable v1.2.0
+- updated to support mobject-serialization v0.5.0
+- changed to support by reference for Value, this allows use in functions
+
 ## v0.4.0-alpha
 
 - updated to support mobject-datatypes v0.7.0
