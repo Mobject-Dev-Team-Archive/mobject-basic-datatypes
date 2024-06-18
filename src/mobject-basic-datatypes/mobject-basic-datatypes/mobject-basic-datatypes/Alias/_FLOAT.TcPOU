@@ -130,23 +130,15 @@ TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Value" Id="{1fb88f68-b0c5-0296-0f56-a8d9ae759e6b}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Value : FLOAT]]></Declaration>
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : REFERENCE TO FLOAT]]></Declaration>
       <Get Name="Get" Id="{8bdcb384-8a67-022d-038b-52ee13c95a00}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Value := activeData;]]></ST>
+          <ST><![CDATA[Value REF= activeData;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{5795a749-afad-022f-1a63-33b91eec5eb2}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[activeData := Value;]]></ST>
-        </Implementation>
-      </Set>
     </Property>
   </POU>
 </TcPlcObject>

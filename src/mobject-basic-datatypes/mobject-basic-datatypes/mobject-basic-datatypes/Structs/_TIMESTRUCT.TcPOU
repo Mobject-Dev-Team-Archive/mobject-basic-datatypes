@@ -144,23 +144,15 @@ TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Value" Id="{1356e963-36fc-0c8a-1591-f9008e798d8c}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Value : TIMESTRUCT]]></Declaration>
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : REFERENCE TO TIMESTRUCT]]></Declaration>
       <Get Name="Get" Id="{e0e830a2-351d-0e1a-1ab6-a46b1c6b5468}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Value := activeData;]]></ST>
+          <ST><![CDATA[Value REF= activeData;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{078f43e0-ed0d-0da4-0e2d-611f4d3420c9}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[activeData := Value;]]></ST>
-        </Implementation>
-      </Set>
     </Property>
     <Property Name="wDay" Id="{044eb8e0-3bff-09fc-1a3a-6e30aba8644e}">
       <Declaration><![CDATA[PROPERTY PUBLIC wDay : Reference to _WORD]]></Declaration>
